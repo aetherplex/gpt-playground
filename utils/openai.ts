@@ -6,3 +6,10 @@ const configuration = new Configuration({
 });
 
 export const openai = new OpenAIApi(configuration);
+
+export const models = ['ada', 'babbage', 'curie', 'davinci'].map((model) => {
+    return {
+        id: `text-${model}-003`,
+        name: `text-${model}-003`,
+    };
+});

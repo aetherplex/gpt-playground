@@ -1,15 +1,19 @@
-import Button from './Button';
-import IconButton from './IconButton';
-import SvgRegenerate from './icons/Regenerate';
-import SvgShowHistory from './icons/ShowHistory';
-import SvgUndoLast from './icons/UndoLast';
-import Sidebar from './Sidebar';
-import { useForm } from 'react-hook-form';
+import { settingsAtom } from '@/store';
 import { openai } from '@/utils/openai';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Button from '../components/Button';
+import IconButton from '../components/IconButton';
+import SvgRegenerate from '../components/icons/Regenerate';
+import SvgShowHistory from '../components/icons/ShowHistory';
+import SvgUndoLast from '../components/icons/UndoLast';
+import Sidebar from '../components/Sidebar';
 
 export default function Playground() {
     const [prompt, setPrompt] = useState<string>('');
+    const [settings] = useAtom(settingsAtom);
+
     const {
         register,
         handleSubmit,
@@ -18,19 +22,14 @@ export default function Playground() {
     } = useForm();
 
     async function onSubmit() {
-        const response = await openai.createCompletion({
-            model: 'text-davinci-003',
-            prompt,
-            max_tokens: 256,
-            temperature: 0,
-        });
+        const response = await openai.createCompletion(settings);
         setPrompt((prev) => prev + response.data.choices[0].text);
     }
 
     return (
-        <div className="w-full bg-slate-50 grid grid-cols-5 2xl:grid-cols-10 gap-6 p-6 flex-1 dark:bg-slate-800">
+        <div className="w-full bg-slate-50 grid grid-cols-4 2xl:grid-cols-10 gap-6 p-6 flex-1 dark:bg-slate-800">
             <form
-                className="flex flex-col gap-3 col-span-4 2xl:col-span-9"
+                className="flex flex-col gap-3 col-span-3 2xl:col-span-9"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <textarea

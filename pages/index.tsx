@@ -1,6 +1,5 @@
 import Header from '@/components/Header';
-import Playground from '@/components/Playground';
-import { trpc } from '@/utils/trpc';
+import Playground from '@/pages/Playground';
 
 export default function Home() {
     return (

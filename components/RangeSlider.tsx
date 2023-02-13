@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-
 interface Props {
+    value: number;
+    setValue: (value: number) => void;
     label: string;
     min?: number;
     max?: number;
@@ -15,10 +15,9 @@ export default function RangeSlider({
     min = 0,
     max = 1,
     step = 0.01,
-    defaultValue = 0.5,
+    value,
+    setValue,
 }: Props) {
-    const [value, setValue] = useState(() => defaultValue);
-
     return (
         <div className="flex flex-col gap-1">
             <div

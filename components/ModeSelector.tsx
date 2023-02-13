@@ -1,11 +1,7 @@
-import Button from './Button';
 import IconButton from './IconButton';
 import SvgCompleteMode from './icons/CompleteMode';
 import SvgEditMode from './icons/EditMode';
 import SvgInsertMode from './icons/InsertMode';
-import SvgRegenerate from './icons/Regenerate';
-import SvgShowHistory from './icons/ShowHistory';
-import SvgUndoLast from './icons/UndoLast';
 
 export default function ModeSelector() {
     return (
@@ -17,18 +13,18 @@ export default function ModeSelector() {
             >
                 Mode
             </span>
-            <div className="flex gap-1 w-full">
-                <IconButton intent="secondary" size="md" fullWidth>
+            <div className="flex w-full">
+                <IconButton intent="secondary" size="sm" fullWidth>
                     <SvgCompleteMode
                         width={20}
                         height={20}
                         className="fill-slate-800 dark:fill-white"
                     />
                 </IconButton>
-                <IconButton intent="secondary" size="md" fullWidth>
+                <IconButton intent="secondary" size="sm" fullWidth>
                     <SvgInsertMode width={20} height={20} />
                 </IconButton>
-                <IconButton intent="secondary" size="md" fullWidth>
+                <IconButton intent="secondary" size="sm" fullWidth>
                     <SvgEditMode width={20} height={20} />
                 </IconButton>
             </div>

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { procedure, router } from '../trpc';
 
-export const appRouter = router({
+export const AppRouter = router({
     // Create procedure at path 'login'
     // The syntax is identical to creating queries
     submit: procedure
@@ -15,3 +15,5 @@ export const appRouter = router({
             return {};
         }),
 });
+
+export type AppRouter = typeof AppRouter;
