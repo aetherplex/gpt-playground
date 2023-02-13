@@ -16,8 +16,8 @@ interface CompletionParams {
 const initialState: CompletionParams = {
     model: 'text-davinci-003',
     prompt: 'The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.',
-    maxTokens: 100,
-    temperature: 0.9,
+    temperature: 0.7,
+    maxTokens: 256,
     topP: 1,
     n: 1,
     frequencyPenalty: 0,

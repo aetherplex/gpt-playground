@@ -22,7 +22,7 @@ export default function Sidebar() {
     const [bestOf, setBestOf] = useAtom(bestOfAtom);
 
     return (
-        <div className="flex flex-col gap-6 w-full">
+        <div className=" flex-col gap-6 w-full hidden md:flex">
             <ModeSelector />
             <ModelSelector />
             <RangeSlider

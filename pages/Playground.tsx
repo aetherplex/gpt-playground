@@ -27,9 +27,9 @@ export default function Playground() {
     }
 
     return (
-        <div className="w-full bg-slate-50 grid grid-cols-4 2xl:grid-cols-10 gap-6 p-6 flex-1 dark:bg-slate-800">
+        <div className="w-full bg-slate-50 grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-6 gap-6 p-6 flex-1 dark:bg-slate-800">
             <form
-                className="flex flex-col gap-3 col-span-3 2xl:col-span-9"
+                className="flex flex-col gap-3 col-span-1 md:col-span-3 2xl:col-span-5"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <textarea
