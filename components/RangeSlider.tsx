@@ -41,8 +41,14 @@ export default function RangeSlider({
                         setValue(e.target.valueAsNumber);
                     }}
                 />
-                {/* TODO: */}
-                {/* <div className="absolute top-3 left-0 h-1.5 flex items-center bg-slate-400 z-0" /> */}
+
+                <div
+                    className="absolute left-0 h-1 flex items-center bg-slate-400 z-20 track"
+                    style={{
+                        width: `${(value / max) * 100}%`,
+                    }}
+                />
+                <div className="absolute left-0 h-1 flex items-center bg-slate-700 z-10 w-full track" />
             </div>
         </div>
     );
