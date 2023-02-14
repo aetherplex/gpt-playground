@@ -1,7 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 
 const buttonStyles = cva(
-    'flex items-center justify-center rounded-sm font-regular focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 transition-colors duration-200 ease-in-out',
+    'flex items-center justify-center rounded-md font-regular focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 transition-colors duration-200 ease-in-out',
     {
         variants: {
             intent: {
@@ -31,6 +31,8 @@ const buttonStyles = cva(
 
 interface IconButtonProps {
     children: React.ReactNode;
+    type?: 'button' | 'submit' | 'reset';
+    onClick?: () => void;
 }
 
 interface Props extends IconButtonProps, VariantProps<typeof buttonStyles> {}
@@ -40,9 +42,15 @@ export default function IconButton({
     intent,
     size,
     fullWidth,
+    onClick,
+    type = 'button',
 }: Props) {
     return (
-        <button className={buttonStyles({ intent, size, fullWidth })}>
+        <button
+            className={buttonStyles({ intent, size, fullWidth })}
+            onClick={onClick}
+            type={type}
+        >
             {children}
         </button>
     );

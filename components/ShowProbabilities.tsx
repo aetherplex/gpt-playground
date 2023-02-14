@@ -10,7 +10,7 @@ export default function ShowProbabilities() {
             </span>
             <button
                 className="
-                border border-slate-200 rounded-sm
+                border border-slate-200 rounded-md
                 px-3 py-2 w-full focus:outline-none focus:ring-2
                     dark:bg-slate-900
                     dark:border-slate-700

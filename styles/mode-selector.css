@@ -1,0 +1,17 @@
+.activeMode {
+    transition: all 0.2s ease;
+    top: -1px;
+    border-radius: 4px;
+}
+
+#complete:checked ~ .activeMode {
+    transform: translateX(0%) scaleY(0.9) scaleX(0.95);
+}
+
+#insert:checked ~ .activeMode {
+    transform: translateX(100%) scaleY(0.9) scaleX(0.95);
+}
+
+#edit:checked ~ .activeMode {
+    transform: translateX(200%) scaleY(0.9) scaleX(0.95);
+}

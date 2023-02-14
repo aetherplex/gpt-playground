@@ -6,24 +6,27 @@ interface CompletionParams {
     maxTokens: number;
     temperature: number;
     topP: number;
-    n: number;
     frequencyPenalty: number;
     presencePenalty: number;
-    stop: string[];
+    stream: boolean;
     bestOf: number;
+    n: number;
+    echo: boolean;
+    stop?: string[];
 }
 
 const initialState: CompletionParams = {
+    echo: true,
     model: 'text-davinci-003',
     prompt: 'The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.',
     temperature: 0.7,
     maxTokens: 256,
     topP: 1,
-    n: 1,
     frequencyPenalty: 0,
     presencePenalty: 0,
-    stop: ['\n', ' Human:', ' AI:'],
+    stream: true,
     bestOf: 1,
+    n: 1,
 };
 
 export const modelAtom = atom(initialState.model);
@@ -36,6 +39,9 @@ export const frequencyPenaltyAtom = atom(initialState.frequencyPenalty);
 export const presencePenaltyAtom = atom(initialState.presencePenalty);
 export const stopAtom = atom(initialState.stop);
 export const bestOfAtom = atom(initialState.bestOf);
+export const streamAtom = atom(initialState.stream);
+
+export const activeModelAtom = atom<string[]>([]);
 
 export const settingsAtom = atom<CompletionParams>((get) => ({
     model: get(modelAtom),
@@ -48,4 +54,6 @@ export const settingsAtom = atom<CompletionParams>((get) => ({
     presencePenalty: get(presencePenaltyAtom),
     stop: get(stopAtom),
     bestOf: get(bestOfAtom),
+    stream: get(streamAtom),
+    echo: true,
 }));

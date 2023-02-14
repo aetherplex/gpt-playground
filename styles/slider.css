@@ -17,7 +17,7 @@
     transition: opacity 0.2s;
     border-radius: 2px;
     visibility: hidden;
-    z-index: 50;
+    z-index: 40;
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */

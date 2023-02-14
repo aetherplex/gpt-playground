@@ -8,7 +8,7 @@ export default function StopSequences() {
                 Enter sequence and press Tab
             </span>
             <textarea
-                className="border border-slate-200 rounded-sm
+                className="border border-slate-200 rounded-md
                 flex-1 p-2 mt-1
                 focus:outline-none focus:ring-1
                 dark:bg-slate-900

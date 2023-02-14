@@ -21,7 +21,8 @@ export default function InjectText({ type }: Props) {
                     className="border border-slate-200
                     dark:border-slate-700
                     dark:bg-slate-900
-                    rounded-sm
+                    dark:text-white
+                    rounded-md
                     pr-3 pl-8 py-1.5 w-full focus:outline-none focus:ring-2
                     text-slate-800
                     font-regular
@@ -36,7 +37,7 @@ export default function InjectText({ type }: Props) {
                         className="w-5 h-5
                         appearance-none
                         checked:bg-teal-500
-                        rounded-sm
+                        rounded-md
                         border border-slate-200
                         dark:border-slate-700
                     "

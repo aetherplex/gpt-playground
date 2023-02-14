@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import Playground from '@/pages/Playground';
+import Playground from '@/components/Playground';
 
 export default function Home() {
     return (

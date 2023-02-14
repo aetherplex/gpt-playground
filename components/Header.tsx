@@ -1,6 +1,19 @@
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { FiMoon, FiSun } from 'react-icons/fi';
 import Button from './Button';
+import IconButton from './IconButton';
 
 export default function Header() {
+    const [currentTheme, setCurrentTheme] = useState<string>('light');
+    const { systemTheme, theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        if (theme) {
+            setCurrentTheme(theme);
+        }
+    }, [theme]);
+
     return (
         <div
             className="w-full px-7 py-4 border-b flex justify-between items-center dark:bg-slate-800
@@ -13,7 +26,7 @@ export default function Header() {
             <div className="flex items-center gap-3">
                 <input
                     placeholder="Load a preset..."
-                    className="border border-slate-200 rounded-sm
+                    className="border border-slate-200 rounded-md
                     px-3 py-1 w-64 focus:outline-none focus:ring-2
                     text-slate-400
                     text-sm
@@ -25,7 +38,15 @@ export default function Header() {
                 <Button intent="secondary">Save</Button>
                 <Button intent="secondary">View code</Button>
                 <Button intent="secondary">Share</Button>
-                <Button intent="secondary">...</Button>
+                <IconButton
+                    intent="secondary"
+                    size="sm"
+                    onClick={() => {
+                        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                    }}
+                >
+                    {currentTheme === 'dark' ? <FiSun /> : <FiMoon />}
+                </IconButton>
             </div>
         </div>
     );

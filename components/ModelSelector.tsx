@@ -1,11 +1,13 @@
-import { modelAtom } from '@/store';
+import { activeModelAtom, modelAtom } from '@/store';
 import { useAtom } from 'jotai';
 import { useCallback, useState } from 'react';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import ModelList from './ModelList';
 
 export default function ModelSelector() {
     const [isActive, setIsActive] = useState<boolean>(false);
-    const [model] = useAtom(modelAtom);
+    const [model, setModel] = useAtom(modelAtom);
+    const [activeModels, setActiveModels] = useAtom(activeModelAtom);
 
     const handleBlur = useCallback(
         (e: React.FocusEvent<HTMLDivElement>) => {
@@ -30,7 +32,7 @@ export default function ModelSelector() {
             <div className="relative" onBlur={handleBlur}>
                 <input
                     className="
-                        border border-slate-200 rounded-sm
+                        border border-slate-200 rounded-md
                         px-3 py-2 w-full focus:outline-none focus:ring-2
                         text-slate-800
                         dark:text-white
@@ -42,10 +44,17 @@ export default function ModelSelector() {
                         text-left
                         cursor-default
                     "
+                    // TODO: Add model filtering on input change
+                    onChange={() => {}}
                     onClick={() => setIsActive(true)}
                     value={model}
                 />
-                {isActive && <ModelList />}
+                {isActive ? (
+                    <FiChevronUp className="absolute right-3 top-2.5 text-slate-400 dark:text-slate-500" />
+                ) : (
+                    <FiChevronDown className="absolute right-3 top-3 text-slate-400 dark:text-slate-500" />
+                )}
+                {isActive && <ModelList setIsActive={setIsActive} />}
             </div>
         </div>
     );
