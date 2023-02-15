@@ -1,5 +1,10 @@
 import { atom } from 'jotai';
 
+export interface InsertText {
+    text: string;
+    enabled: boolean;
+}
+
 interface CompletionParams {
     model: string;
     prompt: string;
@@ -12,6 +17,8 @@ interface CompletionParams {
     bestOf: number;
     n: number;
     echo: boolean;
+    startText: InsertText;
+    restartText: InsertText;
     stop?: string[];
 }
 
@@ -27,6 +34,14 @@ const initialState: CompletionParams = {
     stream: true,
     bestOf: 1,
     n: 1,
+    startText: {
+        text: '',
+        enabled: true,
+    },
+    restartText: {
+        text: '',
+        enabled: true,
+    },
 };
 
 export const modelAtom = atom(initialState.model);
@@ -40,6 +55,8 @@ export const presencePenaltyAtom = atom(initialState.presencePenalty);
 export const stopAtom = atom(initialState.stop);
 export const bestOfAtom = atom(initialState.bestOf);
 export const streamAtom = atom(initialState.stream);
+export const startTextAtom = atom(initialState.startText);
+export const restartTextAtom = atom(initialState.restartText);
 
 export const activeModelAtom = atom<string[]>([]);
 
@@ -56,4 +73,6 @@ export const settingsAtom = atom<CompletionParams>((get) => ({
     bestOf: get(bestOfAtom),
     stream: get(streamAtom),
     echo: true,
+    startText: get(startTextAtom),
+    restartText: get(restartTextAtom),
 }));

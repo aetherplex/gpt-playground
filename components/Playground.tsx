@@ -1,6 +1,4 @@
 import useOpenAI from '@/hooks/useOpenAI';
-import { settingsAtom } from '@/store';
-import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { useForm } from 'react-hook-form';
@@ -13,27 +11,18 @@ import Sidebar from './Sidebar';
 
 export default function Playground() {
     const [prompt, setPrompt] = useState<string>('');
-    const [settings] = useAtom(settingsAtom);
     const resultRef = useRef<HTMLDivElement>(null);
-    const [html, setHtml] = useState(``);
+    const [html, setHtml] = useState<string>('');
 
     const { updatePrompt, response, setResponse } = useOpenAI({ resultRef });
 
-    const sanitizeConf = {
-        allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'span'],
-        allowedAttributes: { a: ['href'] },
-    };
-
     useEffect(() => {
-        setHtml(`${prompt} \n \n${response}`);
+        if (response.length > 0) {
+            setHtml(`${prompt} \n \n${response}`);
+        }
     }, [response]);
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm();
+    const { handleSubmit } = useForm();
 
     async function onSubmit() {
         setResponse('');
@@ -52,14 +41,16 @@ export default function Playground() {
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <ContentEditable
-                    html={html} // innerHTML of the editable div
-                    disabled={false} // use true to disable edition
-                    onChange={handleChange} // handle innerHTML change
+                    html={html}
+                    disabled={false}
+                    onChange={handleChange}
+                    data-ph="Write a tagline for an ice cream shop."
                     className="border border-slate-200   w-full
                             dark:border-slate-700
                             dark:bg-slate-900
                             dark:text-white
                             text-slate-700
+                            bg-white
                             rounded-md flex-1 p-4
                             focus:outline-none
                             w-full

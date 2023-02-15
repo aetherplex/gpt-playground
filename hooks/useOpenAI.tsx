@@ -11,13 +11,16 @@ export default function useOpenAI({ resultRef }: Props) {
     const [response, setResponse] = useState<string>('');
 
     async function updatePrompt(prompt: string) {
+        const fullPrompt = settings.startText.enabled
+            ? `${prompt} ${settings.startText.text}`
+            : prompt;
         const res = await fetch('/api/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                prompt,
+                prompt: fullPrompt,
                 model: settings.model,
                 max_tokens: settings.maxTokens,
                 temperature: settings.temperature,

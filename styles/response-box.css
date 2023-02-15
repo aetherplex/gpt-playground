@@ -1,0 +1,4 @@
+[contenteditable='true']:empty:before {
+    content: attr(data-ph);
+    color: theme('colors.slate.500');
+}

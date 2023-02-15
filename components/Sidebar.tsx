@@ -2,6 +2,8 @@ import {
     bestOfAtom,
     frequencyPenaltyAtom,
     maxTokensAtom,
+    restartTextAtom,
+    startTextAtom,
     temperatureAtom,
     topPAtom,
 } from '@/store';
@@ -16,6 +18,8 @@ import StopSequences from './StopSequences';
 export default function Sidebar() {
     const [temperature, setTemperature] = useAtom(temperatureAtom);
     const [maxLen, setMaxLen] = useAtom(maxTokensAtom);
+    const [startText, setStartText] = useAtom(startTextAtom);
+    const [restartText, setRestartText] = useAtom(restartTextAtom);
     const [topP, setTopP] = useAtom(topPAtom);
     const [frequencyPenalty, setFrequencyPenalty] =
         useAtom(frequencyPenaltyAtom);
@@ -64,8 +68,16 @@ export default function Sidebar() {
                 value={bestOf}
                 setValue={setBestOf}
             />
-            <InjectText type="start" />
-            <InjectText type="restart" />
+            <InjectText
+                type="start"
+                injectValues={startText}
+                setInjectValues={setStartText}
+            />
+            <InjectText
+                type="restart"
+                injectValues={restartText}
+                setInjectValues={setRestartText}
+            />
             <ShowProbabilities />
         </div>
     );

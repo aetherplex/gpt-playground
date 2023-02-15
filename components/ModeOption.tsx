@@ -4,12 +4,14 @@ interface ModeOptionProps {
     icon: JSX.Element;
     id: string;
     setActiveMode: Dispatch<SetStateAction<string>>;
+    defaultChecked?: boolean;
 }
 
 export default function ModeOption({
     icon,
     id,
     setActiveMode,
+    defaultChecked = false,
 }: ModeOptionProps) {
     return (
         <>
@@ -18,6 +20,7 @@ export default function ModeOption({
                 className="hidden"
                 name="modes"
                 id={id}
+                defaultChecked={defaultChecked}
                 onChange={() => setActiveMode(id)}
             />
             <label

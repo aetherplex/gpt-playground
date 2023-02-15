@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import Button from './Button';
 import IconButton from './IconButton';
+import LoadPresets from './LoadPresets';
 
 export default function Header() {
     const [currentTheme, setCurrentTheme] = useState<string>('light');
+    const [isActive, setIsActive] = useState<boolean>(false);
     const { systemTheme, theme, setTheme } = useTheme();
 
     useEffect(() => {
@@ -24,17 +26,7 @@ export default function Header() {
                 Playground
             </h1>
             <div className="flex items-center gap-3">
-                <input
-                    placeholder="Load a preset..."
-                    className="border border-slate-200 rounded-md
-                    px-3 py-1 w-64 focus:outline-none focus:ring-2
-                    text-slate-400
-                    text-sm
-                    dark:bg-slate-900
-                    dark:border-slate-700
-                    "
-                />
-
+                <LoadPresets />
                 <Button intent="secondary">Save</Button>
                 <Button intent="secondary">View code</Button>
                 <Button intent="secondary">Share</Button>

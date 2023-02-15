@@ -1,28 +1,15 @@
-import { activeModelAtom, modelAtom } from '@/store';
+import useBlur from '@/hooks/useBlur';
+import { modelAtom } from '@/store';
 import { useAtom } from 'jotai';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import ModelList from './ModelList';
 
 export default function ModelSelector() {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [model, setModel] = useAtom(modelAtom);
-    const [activeModels, setActiveModels] = useAtom(activeModelAtom);
 
-    const handleBlur = useCallback(
-        (e: React.FocusEvent<HTMLDivElement>) => {
-            const currentTarget = e.currentTarget;
-
-            // Give browser time to focus the next element
-            requestAnimationFrame(() => {
-                // Check if the new focused element is a child of the original container
-                if (!currentTarget.contains(document.activeElement)) {
-                    setIsActive(false);
-                }
-            });
-        },
-        [setIsActive]
-    );
+    const { handleBlur } = useBlur({ setIsActive });
 
     return (
         <div className="flex flex-col gap-3">

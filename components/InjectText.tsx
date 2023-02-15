@@ -1,14 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { InsertText } from '@/store';
+import { SetStateAction } from 'jotai';
+import { Dispatch } from 'react';
 import SvgCheckmark from './icons/Checkmark';
 
 interface Props {
     type: 'start' | 'restart';
+    setInjectValues: Dispatch<SetStateAction<InsertText>>;
+    injectValues: InsertText;
 }
 
-export default function InjectText({ type }: Props) {
-    const [checked, setChecked] = useState(true);
+export default function InjectText({
+    type,
+    setInjectValues,
+    injectValues,
+}: Props) {
     return (
         <div className="flex flex-col gap-3">
             <span
@@ -29,6 +36,14 @@ export default function InjectText({ type }: Props) {
                     text-sm
                     text-left
                     bg-white"
+                    type="text"
+                    value={injectValues.text}
+                    onChange={(e) =>
+                        setInjectValues({
+                            text: e.target.value,
+                            enabled: injectValues.enabled,
+                        })
+                    }
                 />
 
                 <div className="absolute top-0 left-2 h-full flex items-center justify-start">
@@ -41,10 +56,15 @@ export default function InjectText({ type }: Props) {
                         border border-slate-200
                         dark:border-slate-700
                     "
-                        defaultChecked={checked}
-                        onChange={() => setChecked((prev) => !prev)}
+                        defaultChecked={injectValues.enabled}
+                        onChange={() =>
+                            setInjectValues({
+                                text: injectValues.text,
+                                enabled: !injectValues.enabled,
+                            })
+                        }
                     />
-                    {checked && (
+                    {injectValues.enabled && (
                         <SvgCheckmark
                             className="w-3 h-3 absolute top-3.4 left-1"
                             pointerEvents={'none'}

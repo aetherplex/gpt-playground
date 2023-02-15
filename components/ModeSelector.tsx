@@ -24,6 +24,7 @@ export default function ModeSelector() {
             >
                 <ModeOption
                     id="complete"
+                    defaultChecked
                     icon={
                         <SvgCompleteMode
                             width={20}
@@ -75,19 +76,6 @@ export default function ModeSelector() {
 
                 "
                 />
-                {/* <IconButton intent="secondary" size="sm" fullWidth>
-                    <SvgCompleteMode
-                        width={20}
-                        height={20}
-                        className="fill-slate-800 dark:fill-white"
-                    />
-                </IconButton>
-                <IconButton intent="secondary" size="sm" fullWidth>
-                    <SvgInsertMode width={20} height={20} />
-                </IconButton>
-                <IconButton intent="secondary" size="sm" fullWidth>
-                    <SvgEditMode width={20} height={20} />
-                </IconButton> */}
             </div>
         </div>
     );

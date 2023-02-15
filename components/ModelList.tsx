@@ -1,8 +1,7 @@
-import { activeModelAtom, modelAtom } from '@/store';
+import { modelAtom } from '@/store';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
 import { Dispatch, SetStateAction } from 'react';
-import { useQuery } from 'react-query';
 
 const whitelistedModels = [
     'text-davinci-003',
@@ -24,27 +23,7 @@ interface ModelListProps {
 }
 
 export default function ModelList({ setIsActive }: ModelListProps) {
-    const [activeModels, setActiveModels] = useAtom(activeModelAtom);
     const [model, setModel] = useAtom(modelAtom);
-
-    const models = useQuery(
-        'models',
-        async () => {
-            const data = await fetch(`https://api.openai.com/v1/models`, {
-                headers: {
-                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
-                },
-            });
-            return data.json();
-        },
-        {
-            select: (data) => {
-                return data.data.filter((model: any) =>
-                    whitelistedModels.includes(model.id)
-                );
-            },
-        }
-    );
 
     return (
         <div
@@ -57,14 +36,13 @@ export default function ModelList({ setIsActive }: ModelListProps) {
                     GPT-3
                 </span>
                 <div className="flex flex-col max-h-64 ">
-                    {/* TODO: type model */}
                     {whitelistedModels?.length > 0 &&
                         whitelistedModels.map((m: any) => (
                             <button
                                 className={clsx(
-                                    'flex items-center gap-2 p-3 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors duration-100 ease-in-out text-slate-800 dark:text-white font-regular text-xs',
+                                    'flex items-center gap-2 p-3 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors duration-100 ease-in-out text-slate-800 dark:text-white font-regular text-xs',
                                     {
-                                        'bg-teal-500 dark:bg-teal-700 hover:bg-teal-600 dark:hover:bg-teal-600 text-white                       ':
+                                        'bg-teal-500 dark:bg-teal-700 hover:bg-teal-500 dark:hover:bg-teal-600 text-white                       ':
                                             m === model,
                                         'text-slate-800 dark:white':
                                             m === model,
