@@ -19,7 +19,8 @@ interface CompletionParams {
     echo: boolean;
     startText: InsertText;
     restartText: InsertText;
-    stop?: string[];
+    stopSequences: string[];
+    logprobs: number;
 }
 
 const initialState: CompletionParams = {
@@ -42,6 +43,8 @@ const initialState: CompletionParams = {
         text: '',
         enabled: true,
     },
+    stopSequences: [],
+    logprobs: 0,
 };
 
 export const modelAtom = atom(initialState.model);
@@ -52,11 +55,12 @@ export const topPAtom = atom(initialState.topP);
 export const nAtom = atom(initialState.n);
 export const frequencyPenaltyAtom = atom(initialState.frequencyPenalty);
 export const presencePenaltyAtom = atom(initialState.presencePenalty);
-export const stopAtom = atom(initialState.stop);
+export const stopAtom = atom(initialState.stopSequences);
 export const bestOfAtom = atom(initialState.bestOf);
 export const streamAtom = atom(initialState.stream);
 export const startTextAtom = atom(initialState.startText);
 export const restartTextAtom = atom(initialState.restartText);
+export const logprobsAtom = atom(initialState.logprobs);
 
 export const activeModelAtom = atom<string[]>([]);
 
@@ -75,4 +79,6 @@ export const settingsAtom = atom<CompletionParams>((get) => ({
     echo: true,
     startText: get(startTextAtom),
     restartText: get(restartTextAtom),
+    stopSequences: get(stopAtom),
+    logprobs: get(logprobsAtom),
 }));

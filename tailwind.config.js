@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     mode: 'jit',
@@ -10,7 +12,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Colfax', 'sans-serif'],
+                // 'Colfax'
+                sans: ['var(--font-inter)', ...fontFamily.sans],
             },
         },
     },

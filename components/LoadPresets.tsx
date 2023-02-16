@@ -57,7 +57,7 @@ export default function LoadPresets() {
 
                         "
                         >
-                            You don't have any saved presets
+                            No saved presets
                         </span>
                     )}
                 </div>

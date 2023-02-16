@@ -9,3 +9,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model User {
+  id        Int      @default(autoincrement()) @id
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  presets   Preset[]
+}
+
+model Preset {
+  id          Int      @default(autoincrement()) @id
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  model       String
+  temperature Float
+  max_tokens  Int
+  top_p       Float
+  frequency_penalty Float
+  best_of     Int
+  n             Int
+  stop_sequences String[]
+
+  @@unique([userId, name], name: "presetIdentifier")
+}
