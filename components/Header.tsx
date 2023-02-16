@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
 import Button from './Button';
 import IconButton from './IconButton';
+import SvgIcon from './icons/Icon';
 import LoadPresets from './LoadPresets';
 import SaveModal from './SaveModal';
 
@@ -25,9 +27,15 @@ export default function Header() {
             border-slate-200 dark:border-slate-700
         "
             >
-                <h1 className="font-medium text-lg text-slate-800 dark:text-white">
-                    Playground
-                </h1>
+                <SvgIcon
+                    name="logo"
+                    className={clsx(
+                        'w-8 h-8',
+                        currentTheme === 'dark'
+                            ? 'fill-slate-500'
+                            : 'fill-slate-400'
+                    )}
+                />
                 <div className="flex items-center gap-3">
                     <LoadPresets />
                     <Button
