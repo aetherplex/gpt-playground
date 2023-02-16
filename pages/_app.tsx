@@ -6,6 +6,7 @@ import { trpc } from '@/utils/trpc';
 import { Inter } from '@next/font/google';
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -16,6 +17,9 @@ function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider attribute="class" enableSystem={true}>
             <QueryClientProvider client={queryClient}>
+                <Head>
+                    <title>GPT Playground Clone</title>
+                </Head>
                 <div id="modal-root" className={inter.className}>
                     <Component {...pageProps} />
                 </div>
