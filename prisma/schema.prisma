@@ -30,10 +30,12 @@ model Preset {
   userId      Int
   user        User     @relation(fields: [userId], references: [id])
   model       String
+  prompt      String
   temperature Float
   max_tokens  Int
   top_p       Float
   frequency_penalty Float
+  presence_penalty Float
   best_of     Int
   n             Int
   stop_sequences String[]

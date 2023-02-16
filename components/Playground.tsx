@@ -1,4 +1,6 @@
 import useOpenAI from '@/hooks/useOpenAI';
+import { promptAtom } from '@/store';
+import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { useForm } from 'react-hook-form';
@@ -13,12 +15,14 @@ export default function Playground() {
     const [prompt, setPrompt] = useState<string>('');
     const resultRef = useRef<HTMLDivElement>(null);
     const [html, setHtml] = useState<string>('');
+    const [, setSettingsPrompt] = useAtom(promptAtom);
 
     const { updatePrompt, response, setResponse } = useOpenAI({ resultRef });
 
     useEffect(() => {
         if (response.length > 0) {
             setHtml(`${prompt} \n \n${response}`);
+            setSettingsPrompt(`${prompt} \n \n${response}`);
         }
     }, [response]);
 
@@ -32,6 +36,7 @@ export default function Playground() {
     function handleChange(evt: any) {
         setHtml(evt.target.value);
         setPrompt(evt.target.value);
+        setSettingsPrompt(evt.target.value);
     }
 
     return (
