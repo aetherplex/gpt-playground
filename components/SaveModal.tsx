@@ -1,6 +1,7 @@
-import { settingsAtom } from '@/store';
+import { presetListAtom, settingsAtom } from '@/store';
 import { trpc } from '@/utils/trpc';
 import { useAtom } from 'jotai';
+import localforage from 'localforage';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
@@ -19,6 +20,7 @@ export default function SaveModal({ onClose }: SaveModalProps) {
     const [settings] = useAtom(settingsAtom);
     const presetMutation = trpc.savePreset.useMutation();
     const [isLoading, setIsLoading] = useState(false);
+    const [, setPresets] = useAtom(presetListAtom);
 
     const { register, handleSubmit } = useForm<FormValues>();
 
@@ -30,25 +32,55 @@ export default function SaveModal({ onClose }: SaveModalProps) {
         description?: string;
     }) {
         setIsLoading(true);
-        await presetMutation.mutateAsync({
-            name,
-            description,
-            settings: {
-                prompt: settings.prompt,
-                model: settings.model,
-                temperature: settings.temperature,
-                maxTokens: settings.maxTokens,
-                topP: settings.topP,
-                frequencyPenalty: settings.frequencyPenalty,
-                presencePenalty: settings.presencePenalty,
-                n: settings.n,
-                bestOf: settings.bestOf,
-                stream: settings.stream,
-                echo: settings.echo,
-                stopSequences: settings.stopSequences,
-                logprobs: settings.logprobs,
-            },
-        });
+        const localDB =
+            process.env.NEXT_PUBLIC_LOCAL_DB === 'true' ? true : false;
+        if (localDB) {
+            const presets =
+                ((await localforage.getItem('presets')) as any) || [];
+            const updatedPresets = await localforage.setItem('presets', [
+                ...presets,
+                {
+                    name,
+                    description,
+                    settings: {
+                        prompt: settings.prompt,
+                        model: settings.model,
+                        temperature: settings.temperature,
+                        maxTokens: settings.maxTokens,
+                        topP: settings.topP,
+                        frequencyPenalty: settings.frequencyPenalty,
+                        presencePenalty: settings.presencePenalty,
+                        n: settings.n,
+                        bestOf: settings.bestOf,
+                        stream: settings.stream,
+                        echo: settings.echo,
+                        stopSequences: settings.stopSequences,
+                        logprobs: settings.logprobs,
+                    },
+                },
+            ] as any);
+            setPresets(updatedPresets);
+        } else {
+            await presetMutation.mutateAsync({
+                name,
+                description,
+                settings: {
+                    prompt: settings.prompt,
+                    model: settings.model,
+                    temperature: settings.temperature,
+                    maxTokens: settings.maxTokens,
+                    topP: settings.topP,
+                    frequencyPenalty: settings.frequencyPenalty,
+                    presencePenalty: settings.presencePenalty,
+                    n: settings.n,
+                    bestOf: settings.bestOf,
+                    stream: settings.stream,
+                    echo: settings.echo,
+                    stopSequences: settings.stopSequences,
+                    logprobs: settings.logprobs,
+                },
+            });
+        }
         setIsLoading(false);
         onClose();
     }

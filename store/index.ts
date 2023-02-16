@@ -5,6 +5,12 @@ export interface InsertText {
     enabled: boolean;
 }
 
+export interface Preset {
+    name: string;
+    description: string;
+    settings: CompletionParams;
+}
+
 interface CompletionParams {
     model: string;
     prompt: string;
@@ -62,6 +68,7 @@ export const startTextAtom = atom(initialState.startText);
 export const restartTextAtom = atom(initialState.restartText);
 export const logprobsAtom = atom(initialState.logprobs);
 
+export const presetListAtom = atom<Preset[]>([]);
 export const activeModelAtom = atom<string[]>([]);
 
 export const settingsAtom = atom<CompletionParams>((get) => ({

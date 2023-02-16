@@ -1,12 +1,21 @@
-import { trpc } from '@/utils/trpc';
+import { Preset, presetListAtom } from '@/store';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useAtom } from 'jotai';
+import localforage from 'localforage';
+import { useEffect, useState } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 export default function LoadPresets() {
     const [isActive, setIsActive] = useState<boolean>(false);
+    const [presets, setPresets] = useAtom(presetListAtom);
 
-    const presets = trpc.getPresets.useQuery({ userId: 1 });
+    useEffect(() => {
+        async function fetchPresets() {
+            const p = (await localforage.getItem('presets')) as Preset[];
+            setPresets(p);
+        }
+        fetchPresets();
+    }, []);
 
     return (
         <div className="relative">
@@ -37,7 +46,34 @@ export default function LoadPresets() {
                     <span className="text-xs font-regular text-slate-400 dark:text-slate-500 uppercase px-3 py-2">
                         My presets
                     </span>
-                    {presets.isFetched && presets?.data?.length ? (
+                    {presets?.length ? (
+                        // TODO:: fix this
+                        presets.map((preset: any) => (
+                            <button
+                                className={clsx(
+                                    'flex items-center gap-2 p-3 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors duration-100 ease-in-out text-slate-800 dark:text-white font-regular text-xs'
+                                )}
+                                key={preset.name}
+                                onClick={() => {
+                                    setIsActive(false);
+                                }}
+                            >
+                                {preset.name}
+                            </button>
+                        ))
+                    ) : (
+                        <span
+                            className="p-3 text-sm text-slate-400
+                            dark:text-slate-500
+                            font-regular
+                            w-full text-center
+
+                        "
+                        >
+                            No saved presets
+                        </span>
+                    )}
+                    {/* {presets.isFetched && presets?.data?.length ? (
                         // TODO:: fix this
                         presets.data.map((preset: any) => (
                             <button
@@ -63,7 +99,7 @@ export default function LoadPresets() {
                         >
                             No saved presets
                         </span>
-                    )}
+                    )} */}
                 </div>
             )}
         </div>
