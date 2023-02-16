@@ -19,10 +19,12 @@ CREATE TABLE "Preset" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
     "model" TEXT NOT NULL,
+    "prompt" TEXT NOT NULL,
     "temperature" DOUBLE PRECISION NOT NULL,
     "max_tokens" INTEGER NOT NULL,
     "top_p" DOUBLE PRECISION NOT NULL,
     "frequency_penalty" DOUBLE PRECISION NOT NULL,
+    "presence_penalty" DOUBLE PRECISION NOT NULL,
     "best_of" INTEGER NOT NULL,
     "n" INTEGER NOT NULL,
     "stop_sequences" TEXT[],
@@ -32,6 +34,9 @@ CREATE TABLE "Preset" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Preset_userId_name_key" ON "Preset"("userId", "name");
 
 -- AddForeignKey
 ALTER TABLE "Preset" ADD CONSTRAINT "Preset_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
