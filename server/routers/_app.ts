@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { prisma } from '../prisma';
+import prisma from '../prisma';
 import { procedure, router } from '../trpc';
 
 export const AppRouter = router({
