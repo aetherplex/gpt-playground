@@ -1,4 +1,4 @@
-import { useToastStateContext } from '@/hooks/toastContext';
+import { useToastStateContext } from '@/hooks/ToastContext';
 import Toast from './Toast';
 
 export default function ToastContainer() {

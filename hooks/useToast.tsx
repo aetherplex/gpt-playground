@@ -1,4 +1,4 @@
-import { useToastDispatchContext } from './toastContext';
+import { useToastDispatchContext } from './ToastContext';
 
 export function useToast(delay: number) {
     const dispatch = useToastDispatchContext();

@@ -1,5 +1,5 @@
 import ToastContainer from '@/components/ToastContainers';
-import { ToastProvider } from '@/hooks/toastContext';
+import { ToastProvider } from '@/hooks/ToastContext';
 import '@/styles/global.css';
 import '@/styles/modal.css';
 import '@/styles/mode-selector.css';
