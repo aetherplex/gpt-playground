@@ -1,6 +1,8 @@
-# Enhanced GPT Playground
+# GPT Playground Clone
 
-An enhanced version of OpenAI's playground (https://platform.openai.com/playground).
+![Screenshot](assets/preview.png)
+
+An clone of OpenAI's playground (https://platform.openai.com/playground)
 
 **Still a WIP**
 
