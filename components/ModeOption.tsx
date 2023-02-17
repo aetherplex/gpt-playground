@@ -26,7 +26,7 @@ export default function ModeOption({
             <label
                 id={`${id}-label`}
                 htmlFor={id}
-                className="cursor-pointer flex items-center justify-center uppercase select-none font-semibold text-xs rounded-md py-2 text-slate-800 dark:text-white w-full z-20"
+                className="cursor-pointer flex items-center justify-center uppercase select-none font-semibold text-xs rounded-md py-1 text-slate-800 dark:text-white w-full z-20"
             >
                 {icon}
             </label>

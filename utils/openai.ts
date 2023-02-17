@@ -19,7 +19,7 @@ export const models = ['ada', 'babbage', 'curie', 'davinci'].map((model) => {
     };
 });
 
-export async function openAIStream(payload: any) {
+export async function openAIStream(payload: any, apiKey: string) {
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
 
@@ -28,7 +28,7 @@ export async function openAIStream(payload: any) {
     const res = await fetch('https://api.openai.com/v1/completions', {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ''}`,
+            Authorization: `Bearer ${apiKey ?? ''}`,
         },
         method: 'POST',
         body: JSON.stringify(payload),

@@ -1,4 +1,7 @@
+import ToastContainer from '@/components/ToastContainers';
+import { ToastProvider } from '@/hooks/toastContext';
 import '@/styles/global.css';
+import '@/styles/modal.css';
 import '@/styles/mode-selector.css';
 import '@/styles/response-box.css';
 import '@/styles/slider.css';
@@ -16,14 +19,17 @@ const queryClient = new QueryClient();
 function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider attribute="class" enableSystem={true}>
-            <QueryClientProvider client={queryClient}>
-                <Head>
-                    <title>GPT Playground Clone</title>
-                </Head>
-                <div id="modal-root" className={inter.className}>
-                    <Component {...pageProps} />
-                </div>
-            </QueryClientProvider>
+            <ToastProvider>
+                <QueryClientProvider client={queryClient}>
+                    <Head>
+                        <title>GPT Playground Clone</title>
+                    </Head>
+                    <div id="modal-root" className={inter.className}>
+                        <ToastContainer />
+                        <Component {...pageProps} />
+                    </div>
+                </QueryClientProvider>
+            </ToastProvider>
         </ThemeProvider>
     );
 }

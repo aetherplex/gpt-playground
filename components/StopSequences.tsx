@@ -1,25 +1,23 @@
+import { stopSequencesAtom } from '@/store';
+import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { FiX } from 'react-icons/fi';
+import ParamLabel from './ParamLabel';
 
 export default function StopSequences() {
     const [html, setHtml] = useState<string>('');
-    const [tags, setTags] = useState<string[]>([
-        'apple',
-        'banana',
-        'orange',
-        'mango',
-    ]);
+    const [stopSequences, setStopSequences] = useAtom(stopSequencesAtom);
 
     function addTag(e: React.KeyboardEvent<HTMLDivElement>) {
         if (e.key === 'Backspace' && !html) {
-            setTags(tags.slice(0, -1));
+            setStopSequences(stopSequences.slice(0, -1));
         }
 
         if (e.key === 'Tab' || e.key === 'Enter') {
             e.preventDefault();
             const tag = html.trim();
             if (tag) {
-                setTags([...tags, tag]);
+                setStopSequences([...stopSequences, tag]);
                 setHtml('');
             }
         }
@@ -27,9 +25,7 @@ export default function StopSequences() {
 
     return (
         <div className="flex flex-col gap-1">
-            <span className="text-sm font-regular text-slate-800 dark:text-white">
-                Stop sequences
-            </span>
+            <ParamLabel>Stop Sequences</ParamLabel>
             <span className="text-xs font-regular text-slate-500">
                 Enter sequence and press Tab
             </span>
@@ -60,7 +56,7 @@ export default function StopSequences() {
                     }
                 }
             >
-                {tags.map((tag) => (
+                {stopSequences.map((tag) => (
                     <div
                         key={tag}
                         className="bg-slate-200 dark:bg-slate-700
@@ -74,7 +70,9 @@ export default function StopSequences() {
                         <span className=" py-1">{tag}</span>
                         <button
                             onClick={() => {
-                                setTags(tags.filter((t) => t !== tag));
+                                setStopSequences(
+                                    stopSequences.filter((t) => t !== tag)
+                                );
                             }}
                         >
                             <FiX />

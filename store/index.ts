@@ -61,7 +61,7 @@ export const topPAtom = atom(initialState.topP);
 export const nAtom = atom(initialState.n);
 export const frequencyPenaltyAtom = atom(initialState.frequencyPenalty);
 export const presencePenaltyAtom = atom(initialState.presencePenalty);
-export const stopAtom = atom(initialState.stopSequences);
+export const stopSequencesAtom = atom(initialState.stopSequences);
 export const bestOfAtom = atom(initialState.bestOf);
 export const streamAtom = atom(initialState.stream);
 export const startTextAtom = atom(initialState.startText);
@@ -70,6 +70,7 @@ export const logprobsAtom = atom(initialState.logprobs);
 
 export const presetListAtom = atom<Preset[]>([]);
 export const activeModelAtom = atom<string[]>([]);
+export const apiKeyAtom = atom<string>('');
 
 export const settingsAtom = atom<CompletionParams>((get) => ({
     model: get(modelAtom),
@@ -80,12 +81,11 @@ export const settingsAtom = atom<CompletionParams>((get) => ({
     n: get(nAtom),
     frequencyPenalty: get(frequencyPenaltyAtom),
     presencePenalty: get(presencePenaltyAtom),
-    stop: get(stopAtom),
     bestOf: get(bestOfAtom),
     stream: get(streamAtom),
     echo: true,
     startText: get(startTextAtom),
     restartText: get(restartTextAtom),
-    stopSequences: get(stopAtom),
+    stopSequences: get(stopSequencesAtom),
     logprobs: get(logprobsAtom),
 }));

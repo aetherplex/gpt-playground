@@ -5,13 +5,13 @@
 }
 
 #complete:checked ~ .activeMode {
-    transform: translateX(0%) scaleY(0.9) scaleX(0.95);
+    transform: translateX(0%) scaleY(0.85) scaleX(0.95);
 }
 
 #insert:checked ~ .activeMode {
-    transform: translateX(100%) scaleY(0.9) scaleX(0.95);
+    transform: translateX(100%) scaleY(0.85) scaleX(0.95);
 }
 
 #edit:checked ~ .activeMode {
-    transform: translateX(200%) scaleY(0.9) scaleX(0.95);
+    transform: translateX(200%) scaleY(0.85) scaleX(0.95);
 }

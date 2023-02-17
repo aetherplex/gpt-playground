@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import ModelList from './ModelList';
+import ParamLabel from './ParamLabel';
 
 export default function ModelSelector() {
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -13,9 +14,7 @@ export default function ModelSelector() {
 
     return (
         <div className="flex flex-col gap-3">
-            <span className="text-sm font-regular text-slate-800 dark:text-white">
-                Model
-            </span>
+            <ParamLabel>Model</ParamLabel>
             <div className="relative" onBlur={handleBlur}>
                 <input
                     className="

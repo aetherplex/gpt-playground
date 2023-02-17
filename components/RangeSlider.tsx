@@ -1,5 +1,7 @@
 'use client';
 
+import ParamLabel from './ParamLabel';
+
 interface Props {
     value: number;
     setValue: (value: number) => void;
@@ -25,8 +27,8 @@ export default function RangeSlider({
             text-slate-800 dark:text-white
             "
             >
-                <span className="text-sm font-regular">{label}</span>
-                <span className="text-sm font-regular">{value}</span>
+                <ParamLabel>{label}</ParamLabel>
+                <ParamLabel>{value}</ParamLabel>
             </div>
             <div className="w-full relative">
                 <input

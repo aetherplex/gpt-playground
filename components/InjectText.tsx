@@ -4,6 +4,7 @@ import { InsertText } from '@/store';
 import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react';
 import SvgCheckmark from './icons/Checkmark';
+import ParamLabel from './ParamLabel';
 
 interface Props {
     type: 'start' | 'restart';
@@ -18,11 +19,12 @@ export default function InjectText({
 }: Props) {
     return (
         <div className="flex flex-col gap-3">
-            <span
-                className="text-sm font-regular
-            text-slate-800 dark:text-white
-            "
-            >{`Inject ${type} text`}</span>
+            <ParamLabel>
+                {`Inject ${type} text`}{' '}
+                <span className="text-slate-400 dark:text-slate-500">
+                    (Not functional)
+                </span>
+            </ParamLabel>
             <div className="relative w-full">
                 <input
                     className="border border-slate-200

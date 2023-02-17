@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
+import ApiModal from './ApiModal';
 import Button from './Button';
 import IconButton from './IconButton';
 import SvgIcon from './icons/Icon';
@@ -12,7 +13,8 @@ export default function Header() {
     const [currentTheme, setCurrentTheme] = useState<string>('light');
     const [isActive, setIsActive] = useState<boolean>(false);
     const { systemTheme, theme, setTheme } = useTheme();
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [saveModalOpen, setSaveModalOpen] = useState<boolean>(false);
+    const [apiKeyModalOpen, setApiKeyModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
         if (theme) {
@@ -41,10 +43,18 @@ export default function Header() {
                     <Button
                         intent="secondary"
                         onClick={() => {
-                            setModalOpen(true);
+                            setSaveModalOpen(true);
                         }}
                     >
                         Save
+                    </Button>
+                    <Button
+                        intent="secondary"
+                        onClick={() => {
+                            setApiKeyModalOpen(true);
+                        }}
+                    >
+                        Add API key
                     </Button>
                     {/* <Button intent="secondary">View code</Button>
                 <Button intent="secondary">Share</Button> */}
@@ -61,7 +71,12 @@ export default function Header() {
                     </IconButton>
                 </div>
             </div>
-            {modalOpen && <SaveModal onClose={() => setModalOpen(false)} />}
+            {saveModalOpen && (
+                <SaveModal onClose={() => setSaveModalOpen(false)} />
+            )}
+            {apiKeyModalOpen && (
+                <ApiModal onClose={() => setApiKeyModalOpen(false)} />
+            )}
         </>
     );
 }

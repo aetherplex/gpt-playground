@@ -4,20 +4,20 @@ import SvgCompleteMode from './icons/CompleteMode';
 import SvgEditMode from './icons/EditMode';
 import SvgInsertMode from './icons/InsertMode';
 import ModeOption from './ModeOption';
+import ParamLabel from './ParamLabel';
 
 export default function ModeSelector() {
     const [activeMode, setActiveMode] = useState('complete');
     return (
         <div className="flex flex-col gap-3">
-            <span
-                className="text-sm font-regular
-            text-slate-800 dark:text-white
-            "
-            >
-                Mode
-            </span>
+            <ParamLabel>
+                Mode{' '}
+                <span className="text-slate-400 dark:text-slate-500">
+                    (Not functional)
+                </span>
+            </ParamLabel>
             <div
-                className="flex w-full bg-slate-100 dark:bg-slate-900 h-16 rounded-md relative
+                className="flex w-full bg-slate-100 dark:bg-slate-900 h-14 rounded-md relative
                 border border-slate-200 dark:border-slate-700
 
             "
@@ -72,7 +72,7 @@ export default function ModeSelector() {
                     setActiveMode={setActiveMode}
                 />
                 <div
-                    className="activeMode h-16 w-1/3  left-0 bg-white dark:bg-slate-700 absolute z-10
+                    className="activeMode h-14 w-1/3  left-0 bg-white dark:bg-slate-700 absolute z-10
 
                 "
                 />

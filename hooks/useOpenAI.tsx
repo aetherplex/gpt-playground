@@ -1,4 +1,4 @@
-import { settingsAtom } from '@/store';
+import { apiKeyAtom, settingsAtom } from '@/store';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 
@@ -9,6 +9,7 @@ interface Props {
 export default function useOpenAI({ resultRef }: Props) {
     const [settings] = useAtom(settingsAtom);
     const [response, setResponse] = useState<string>('');
+    const [apiKey] = useAtom(apiKeyAtom);
 
     async function updatePrompt(prompt: string) {
         const fullPrompt = settings.startText.enabled
@@ -29,6 +30,7 @@ export default function useOpenAI({ resultRef }: Props) {
                 presence_penalty: settings.presencePenalty,
                 stream: settings.stream,
                 echo: true,
+                apiKey,
             }),
         });
 

@@ -1,5 +1,6 @@
 import useOpenAI from '@/hooks/useOpenAI';
-import { promptAtom } from '@/store';
+import { useToast } from '@/hooks/useToast';
+import { apiKeyAtom, promptAtom } from '@/store';
 import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import ContentEditable from 'react-contenteditable';
@@ -16,6 +17,8 @@ export default function Playground() {
     const resultRef = useRef<HTMLDivElement>(null);
     const [html, setHtml] = useState<string>('');
     const [, setSettingsPrompt] = useAtom(promptAtom);
+    const [apiKey] = useAtom(apiKeyAtom);
+    const toast = useToast(4000);
 
     const { updatePrompt, response, setResponse } = useOpenAI({ resultRef });
 
@@ -30,7 +33,15 @@ export default function Playground() {
 
     async function onSubmit() {
         setResponse('');
-        await updatePrompt(prompt);
+        if (!apiKey) {
+            toast('error', 'Please add an OpenAI API key.');
+            return;
+        }
+        try {
+            await updatePrompt(prompt);
+        } catch (error) {
+            toast('error', 'Something went wrong.');
+        }
     }
 
     function handleChange(evt: any) {
@@ -61,9 +72,9 @@ export default function Playground() {
                             w-full
                             leading-6
                             focus:placeholder-slate-300
-                        overflow-y-auto
-                        whitespace-pre-wrap
-                        "
+                            overflow-y-auto
+                            whitespace-pre-wrap
+                            "
                 />
                 <div className="flex justify-between items-center">
                     <div className="flex gap-2 items-center">
@@ -86,7 +97,7 @@ export default function Playground() {
                     </div>
                 </div>
             </form>
-
+            {}
             <Sidebar />
         </div>
     );

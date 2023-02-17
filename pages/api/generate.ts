@@ -15,18 +15,8 @@ export default async function handler(req: Request) {
         n,
         stream,
         model,
+        apiKey,
     } = (await req.json()) as any;
-    // {
-    //     prompt: string;
-    //     temperature: string;
-    //     max_tokens: string;
-    //     presence_penalty: string;
-    //     frequency_penalty: string;
-    //     top_p: string;
-    //     n: string;
-    //     stream: string;
-    //     model: string;
-    // };
 
     const payload = {
         model,
@@ -40,6 +30,6 @@ export default async function handler(req: Request) {
         stream,
     };
 
-    const responseStream = await openAIStream(payload);
+    const responseStream = await openAIStream(payload, apiKey);
     return new Response(responseStream);
 }

@@ -2,6 +2,7 @@ import useBlur from '@/hooks/useBlur';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import ParamLabel from './ParamLabel';
 
 const options = ['Off', 'Most likely', 'Least likely', 'Full spectrum'];
 
@@ -17,13 +18,12 @@ export default function ShowProbabilities() {
 
     return (
         <div className="flex flex-col gap-3">
-            <span
-                className="text-sm font-regular
-                  text-slate-800 dark:text-white
-            "
-            >
-                Show probabilities
-            </span>
+            <ParamLabel>
+                Show probabilities{' '}
+                <span className="text-slate-400 dark:text-slate-500">
+                    (Not functional)
+                </span>
+            </ParamLabel>
             <div className="relative" onBlur={handleBlur}>
                 <input
                     className="
