@@ -38,7 +38,7 @@ export default function ApiModal({ onClose }: ApiModalProps) {
                     className="w-full h-full flex flex-col gap-5 p-5"
                     onSubmit={handleSubmit(savePreset)}
                 >
-                    <h1 className="text-lg font-medium text-slate-800 dark:text-white">
+                    <h1 className="text-lg font-semibold text-slate-800 dark:text-white">
                         Set OpenAI API key
                     </h1>
                     <p className="font-regular text-slate-600 dark:text-slate-400 text-sm">

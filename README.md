@@ -10,25 +10,6 @@ To get started, clone the repo and run
 pnpm install
 ```
 
-You'll need to add your OpenAI API key to a fresh `.env` file, along with a link pointing to a local or hosted postgres DB:
-
-```
-NEXT_PUBLIC_OPENAI_API_KEY="<YOUR-KEY>"
-DATABASE_URL="<DB-URL>"
-```
-
-Migrate the DB schema by running:
-
-```
-npx prisma migrate dev
-```
-
-Followed by:
-
-```
-npx prisma generate && npx prisma db seed
-```
-
 Then run
 
 ```
@@ -36,3 +17,7 @@ pnpm run dev
 ```
 
 to start the development server.
+
+You'll need to add your own OpenAI API Key, which will be saved in the application's state and will therefore be wiped upon browser refresh or session end.
+
+Presets can be saved and are stored in your browser's IndexDB.

@@ -1,4 +1,5 @@
-import { Preset, presetListAtom } from '@/store';
+import useBlur from '@/hooks/useBlur';
+import { Preset, presetListAtom, settingsAtom } from '@/store';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
 import localforage from 'localforage';
@@ -8,6 +9,8 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 export default function LoadPresets() {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [presets, setPresets] = useAtom(presetListAtom);
+    const [, setSettings] = useAtom(settingsAtom);
+    const { handleBlur } = useBlur({ setIsActive });
 
     useEffect(() => {
         async function fetchPresets() {
@@ -17,8 +20,13 @@ export default function LoadPresets() {
         fetchPresets();
     }, []);
 
+    function handlePresetSelection(preset: any) {
+        setSettings(preset.settings);
+        setIsActive(false);
+    }
+
     return (
-        <div className="relative">
+        <div className="relative" onBlur={handleBlur}>
             <input
                 placeholder="Load a preset..."
                 className="border border-slate-200 rounded-md
@@ -30,7 +38,6 @@ export default function LoadPresets() {
                     relative
                     "
                 onClick={() => setIsActive(true)}
-                onBlur={() => setIsActive(false)}
             />
             {isActive ? (
                 <FiChevronUp className="absolute right-3 top-1.5 text-slate-400 dark:text-slate-500" />
@@ -47,16 +54,14 @@ export default function LoadPresets() {
                         My presets
                     </span>
                     {presets?.length ? (
-                        // TODO:: fix this
+                        // TODO:: fix types
                         presets.map((preset: any) => (
                             <button
                                 className={clsx(
                                     'flex items-center gap-2 p-3 hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors duration-100 ease-in-out text-slate-800 dark:text-white font-regular text-xs'
                                 )}
                                 key={preset.name}
-                                onClick={() => {
-                                    setIsActive(false);
-                                }}
+                                onClick={() => handlePresetSelection(preset)}
                             >
                                 {preset.name}
                             </button>

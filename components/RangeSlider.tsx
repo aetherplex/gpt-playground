@@ -21,7 +21,7 @@ export default function RangeSlider({
     setValue,
 }: Props) {
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col ">
             <div
                 className="flex justify-between items-center
             text-slate-800 dark:text-white

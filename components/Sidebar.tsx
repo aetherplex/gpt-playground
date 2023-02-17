@@ -8,11 +8,9 @@ import {
     topPAtom,
 } from '@/store';
 import { useAtom } from 'jotai';
-import InjectText from './InjectText';
 import ModelSelector from './ModelSelector';
 import ModeSelector from './ModeSelector';
 import RangeSlider from './RangeSlider';
-import ShowProbabilities from './ShowProbabilities';
 import StopSequences from './StopSequences';
 
 export default function Sidebar() {
@@ -68,7 +66,7 @@ export default function Sidebar() {
                 value={bestOf}
                 setValue={setBestOf}
             />
-            <InjectText
+            {/* <InjectText
                 type="start"
                 injectValues={startText}
                 setInjectValues={setStartText}
@@ -78,7 +76,7 @@ export default function Sidebar() {
                 injectValues={restartText}
                 setInjectValues={setRestartText}
             />
-            <ShowProbabilities />
+            <ShowProbabilities /> */}
         </div>
     );
 }

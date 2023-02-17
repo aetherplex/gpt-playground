@@ -72,20 +72,38 @@ export const presetListAtom = atom<Preset[]>([]);
 export const activeModelAtom = atom<string[]>([]);
 export const apiKeyAtom = atom<string>('');
 
-export const settingsAtom = atom<CompletionParams>((get) => ({
-    model: get(modelAtom),
-    prompt: get(promptAtom),
-    maxTokens: get(maxTokensAtom),
-    temperature: get(temperatureAtom),
-    topP: get(topPAtom),
-    n: get(nAtom),
-    frequencyPenalty: get(frequencyPenaltyAtom),
-    presencePenalty: get(presencePenaltyAtom),
-    bestOf: get(bestOfAtom),
-    stream: get(streamAtom),
-    echo: true,
-    startText: get(startTextAtom),
-    restartText: get(restartTextAtom),
-    stopSequences: get(stopSequencesAtom),
-    logprobs: get(logprobsAtom),
-}));
+export const settingsAtom = atom<CompletionParams, any, any>(
+    (get) => ({
+        model: get(modelAtom),
+        prompt: get(promptAtom),
+        maxTokens: get(maxTokensAtom),
+        temperature: get(temperatureAtom),
+        topP: get(topPAtom),
+        n: get(nAtom),
+        frequencyPenalty: get(frequencyPenaltyAtom),
+        presencePenalty: get(presencePenaltyAtom),
+        bestOf: get(bestOfAtom),
+        stream: get(streamAtom),
+        echo: true,
+        startText: get(startTextAtom),
+        restartText: get(restartTextAtom),
+        stopSequences: get(stopSequencesAtom),
+        logprobs: get(logprobsAtom),
+    }),
+    (_get, set, newSettings: CompletionParams) => {
+        set(modelAtom, newSettings.model);
+        set(promptAtom, newSettings.prompt);
+        set(maxTokensAtom, newSettings.maxTokens);
+        set(temperatureAtom, newSettings.temperature);
+        set(topPAtom, newSettings.topP);
+        set(nAtom, newSettings.n);
+        set(frequencyPenaltyAtom, newSettings.frequencyPenalty);
+        set(presencePenaltyAtom, newSettings.presencePenalty);
+        set(bestOfAtom, newSettings.bestOf);
+        set(streamAtom, newSettings.stream);
+        set(startTextAtom, newSettings.startText);
+        set(restartTextAtom, newSettings.restartText);
+        set(stopSequencesAtom, newSettings.stopSequences);
+        set(logprobsAtom, newSettings.logprobs);
+    }
+);

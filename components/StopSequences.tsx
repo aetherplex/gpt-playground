@@ -56,7 +56,7 @@ export default function StopSequences() {
                     }
                 }
             >
-                {stopSequences.map((tag) => (
+                {stopSequences?.map((tag) => (
                     <div
                         key={tag}
                         className="bg-slate-200 dark:bg-slate-700

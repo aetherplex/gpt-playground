@@ -56,6 +56,8 @@ export default function SaveModal({ onClose }: SaveModalProps) {
                         echo: settings.echo,
                         stopSequences: settings.stopSequences,
                         logprobs: settings.logprobs,
+                        startText: settings.startText,
+                        restartText: settings.restartText,
                     },
                 },
             ] as any);
@@ -97,7 +99,7 @@ export default function SaveModal({ onClose }: SaveModalProps) {
                     className="w-full h-full flex flex-col gap-5 p-5"
                     onSubmit={handleSubmit(savePreset)}
                 >
-                    <h1 className="text-lg font-medium text-slate-800 dark:text-white">
+                    <h1 className="text-lg font-semibold text-slate-800 dark:text-white">
                         Save preset
                     </h1>
                     <p className="font-regular text-slate-600 dark:text-slate-500 text-sm">

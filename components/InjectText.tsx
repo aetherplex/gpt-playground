@@ -39,11 +39,11 @@ export default function InjectText({
                     text-left
                     bg-white"
                     type="text"
-                    value={injectValues.text}
+                    value={injectValues?.text}
                     onChange={(e) =>
                         setInjectValues({
                             text: e.target.value,
-                            enabled: injectValues.enabled,
+                            enabled: injectValues?.enabled,
                         })
                     }
                 />
@@ -58,15 +58,15 @@ export default function InjectText({
                         border border-slate-200
                         dark:border-slate-700
                     "
-                        defaultChecked={injectValues.enabled}
+                        defaultChecked={injectValues?.enabled}
                         onChange={() =>
                             setInjectValues({
-                                text: injectValues.text,
+                                text: injectValues?.text,
                                 enabled: !injectValues.enabled,
                             })
                         }
                     />
-                    {injectValues.enabled && (
+                    {injectValues?.enabled && (
                         <SvgCheckmark
                             className="w-3 h-3 absolute top-3.4 left-1"
                             pointerEvents={'none'}
