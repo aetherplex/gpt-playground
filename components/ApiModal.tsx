@@ -1,5 +1,4 @@
-import { apiKeyAtom, presetListAtom, settingsAtom } from '@/store';
-import { trpc } from '@/utils/trpc';
+import { apiKeyAtom } from '@/store';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -15,10 +14,7 @@ interface FormValues {
 }
 
 export default function ApiModal({ onClose }: ApiModalProps) {
-    const [settings] = useAtom(settingsAtom);
-    const presetMutation = trpc.savePreset.useMutation();
     const [isLoading, setIsLoading] = useState(false);
-    const [, setPresets] = useAtom(presetListAtom);
     const [apiKey, setApiKey] = useAtom(apiKeyAtom);
 
     const { register, handleSubmit } = useForm<FormValues>();
@@ -46,9 +42,9 @@ export default function ApiModal({ onClose }: ApiModalProps) {
                         Set OpenAI API key
                     </h1>
                     <p className="font-regular text-slate-600 dark:text-slate-400 text-sm">
-                        This will be stored in the app's local state and will
-                        need to be added again if you end your browser session
-                        or refresh the page.
+                        This will be stored in the app&apos;s local state and
+                        will need to be added again if you end your browser
+                        session or refresh the page.
                     </p>
                     <div className="flex flex-col gap-1">
                         <label
